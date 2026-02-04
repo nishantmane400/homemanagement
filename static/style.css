@@ -1,0 +1,300 @@
+/* ================================
+   GLOBAL RESET & THEME
+================================ */
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: #f4f7fb;
+    color: #2c2c2c;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* ================================
+   NAVBAR (STRONG)
+================================ */
+.navbar {
+    background: #ffffff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    padding: 14px 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e3a8a !important;
+}
+
+.nav-link {
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 16px;
+    color: #333 !important;
+    position: relative;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: #2563eb;
+    bottom: -6px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ================================
+   HERO / BANNER
+================================ */
+.main-banner {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    position: relative;
+    filter: brightness(80%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to right,
+        rgba(30,58,138,0.7),
+        rgba(0,0,0,0.3)
+    );
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: #fff;
+    max-width: 520px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.hero-text p {
+    font-size: 17px;
+    margin-top: 15px;
+    opacity: 0.95;
+}
+
+/* ================================
+   SECTION TITLES
+================================ */
+.section-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(to right, #2563eb, #1e3a8a);
+    display: block;
+    margin: 12px auto 0;
+    border-radius: 5px;
+}
+
+/* ================================
+   VISION & MISSION (CARD STYLE)
+================================ */
+.vm-section {
+    background: #ffffff;
+    padding: 70px 0;
+}
+
+.vm-card {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.vm-card:hover {
+    transform: translateY(-8px);
+}
+
+.vm-card h4 {
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.vm-card p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* ================================
+   STATISTICS (IMPACT LOOK)
+================================ */
+.stats-bar {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    padding: 70px 0;
+    color: #fff;
+}
+
+.stat-item {
+    padding: 25px;
+}
+
+.stat-item h2 {
+    font-size: 44px;
+    font-weight: 900;
+}
+
+.stat-item p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+/* ================================
+   ADMIN HOME MANAGER
+================================ */
+.admin-box {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    margin-bottom: 60px;
+    border-left: 8px solid #2563eb;
+}
+
+.admin-box h4 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 25px;
+}
+
+/* ================================
+   ADMIN MENU BAR
+================================ */
+.admin-menu {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.admin-menu a {
+    padding: 10px 20px;
+    background: #f1f5f9;
+    border-radius: 25px;
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+.admin-menu a:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* ================================
+   FORMS
+================================ */
+.form-control, textarea {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 12px 14px;
+}
+
+.form-control:focus, textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.2rem rgba(37,99,235,.25);
+}
+
+/* ================================
+   BUTTONS
+================================ */
+.btn {
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    border: none;
+}
+
+/* ================================
+   TABLES
+================================ */
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.table thead {
+    background: #f1f5f9;
+}
+
+.table th {
+    font-weight: 800;
+}
+
+/* ================================
+   FOOTER
+================================ */
+footer {
+    background: #0f172a;
+    color: #cbd5e1;
+    padding: 50px 0;
+}
+
+footer h5 {
+    color: #fff;
+    font-weight: 700;
+}
+
+footer a {
+    color: #cbd5e1;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .main-banner {
+        height: 360px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+}
