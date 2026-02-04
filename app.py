@@ -1,19 +1,20 @@
 import os
-import webbrowser
-from threading import Timer
 from datetime import datetime
-
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-
+from werkzeug.utils import secure_filename
 
 # -----------------------------
 # APP CONFIG
 # -----------------------------
 app = Flask(__name__)
+
+# Database (SQLite – works on Railway)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ngo_management.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'ngo_secret_key'
+
+# Secret Key (use ENV in production)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ngo_secret_key')
 
 # Upload folder
 UPLOAD_FOLDER = 'static/uploads'
@@ -23,9 +24,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db = SQLAlchemy(app)
 
 # -----------------------------
-# MODELS (merged from models.py)
+# MODELS
 # -----------------------------
-
 class User(db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True)
@@ -42,7 +42,9 @@ class VisionMission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vision_description = db.Column(db.Text)
     mission_description = db.Column(db.Text)
-    last_updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    last_updated = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
 
 class Statistic(db.Model):
@@ -93,7 +95,7 @@ def admin_dashboard():
     return render_template('admin_dashboard.html')
 
 # -----------------------------
-# ADMIN HOME MANAGER (ALL-IN-ONE)
+# ADMIN HOME MANAGER
 # -----------------------------
 @app.route('/admin/home-manager', methods=['GET', 'POST'])
 def home_manager():
@@ -103,7 +105,7 @@ def home_manager():
     if request.method == 'POST':
         action = request.form.get('action')
 
-        # -------- Vision & Mission --------
+        # ---- Vision & Mission ----
         if action == 'save_vm':
             if not vm:
                 vm = VisionMission()
@@ -113,15 +115,15 @@ def home_manager():
 
             db.session.add(vm)
             db.session.commit()
-            flash('Vision & Mission updated successfully')
+            flash('Vision & Mission updated successfully', 'success')
 
-        # -------- Banner Upload --------
+        # ---- Banner Upload ----
         elif action == 'add_banner':
             file = request.files.get('banner_image')
             title = request.form.get('image_name')
 
             if file and file.filename:
-                filename = file.filename
+                filename = secure_filename(file.filename)
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(filepath)
 
@@ -132,7 +134,7 @@ def home_manager():
                 )
                 db.session.add(banner)
                 db.session.commit()
-                flash('Banner added successfully')
+                flash('Banner added successfully', 'success')
 
         return redirect(url_for('home_manager'))
 
@@ -144,12 +146,8 @@ def home_manager():
     )
 
 # -----------------------------
-# AUTO OPEN BROWSER
+# APP ENTRY POINT (RAILWAY)
 # -----------------------------
 if __name__ == '__main__':
-
-    def open_browser():
-        webbrowser.open_new("http://127.0.0.1:5000/")
-
-    Timer(1, open_browser).start()
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 8000))
+    app.run(host='0.0.0.0', port=port)
